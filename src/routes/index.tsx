@@ -16,13 +16,13 @@ import {
   Droplets, Megaphone, Rocket, Cpu, ArrowRight, ArrowUpRight, Check, ChevronDown,
   Menu, X, Twitter, Send, Github, Sparkles, Lock, Layers, BarChart3,
 } from "lucide-react";
-import logoAsset from "@/assets/hudlabs-logo.png.asset.json";
+import logoAsset from "@/assets/hudlabs-logo.jpeg";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 
 const OG_IMAGE =
   typeof window === "undefined"
-    ? logoAsset.url
-    : new URL(logoAsset.url, window.location.origin).toString();
+    ? logoAsset
+    : new URL(logoAsset, window.location.origin).toString();
 
 export const Route = createFileRoute("/")({
   component: HudLabsLanding,
@@ -149,7 +149,7 @@ function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-8">
         <a href="#home" className="flex items-center gap-2.5">
-          <img src={logoAsset.url} alt="HUDLABS" className="h-9 w-9 drop-shadow-[0_0_16px_rgba(200,255,0,0.45)]" />
+          <img src={logoAsset} alt="HUDLABS" className="h-9 w-9 drop-shadow-[0_0_16px_rgba(200,255,0,0.45)]" />
           <span className="font-display text-lg font-bold tracking-tight">HUDLABS</span>
         </a>
 
@@ -796,7 +796,7 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-4 md:px-8 py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5">
-            <img src={logoAsset.url} alt="HUDLABS" className="h-9 w-9 drop-shadow-[0_0_16px_rgba(200,255,0,0.4)]" />
+            <img src={logoAsset} alt="HUDLABS" className="h-9 w-9 drop-shadow-[0_0_16px_rgba(200,255,0,0.4)]" />
             <span className="font-display text-lg font-bold">HUDLABS</span>
           </div>
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">

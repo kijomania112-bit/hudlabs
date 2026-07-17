@@ -1,11 +1,16 @@
 import { useMemo, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useAccount } from "wagmi";
-import logoAsset from "@/assets/hudlabs-logo.png.asset.json";
+import logoAsset from "@/assets/hudlabs-logo.jpeg";
 import {
   Upload, Rocket, Info, Twitter, Send, Github, Globe, BookOpen,
   MessageCircle, ImageIcon, Sparkles, Loader2, Check,
 } from "lucide-react";
+
+const OG_IMAGE =
+  typeof window === "undefined"
+    ? logoAsset
+    : new URL(logoAsset, window.location.origin).toString();
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import { ChainSelector } from "@/components/ChainSelector";
 import { getChainMeta } from "@/lib/chains";
@@ -23,6 +28,16 @@ export const Route = createFileRoute("/create")({
       { property: "og:title", content: "Launch a Token — HUDLABS" },
       {
         property: "og:description",
+        content: "Fair-launch tokens on the HUDLABS launchpad — 1B supply, bonded curve, LP 100% burned.",
+      },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:url", content: "/create" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@hudlabs" },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "twitter:title", content: "Launch a Token — HUDLABS" },
+      {
+        name: "twitter:description",
         content: "Fair-launch tokens on the HUDLABS launchpad — 1B supply, bonded curve, LP 100% burned.",
       },
     ],
@@ -99,7 +114,7 @@ function CreateLaunchPage() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <Link to="/" className="flex items-center gap-2">
             <img
-              src={logoAsset.url}
+              src={logoAsset}
               alt="HUDLABS"
               className="h-8 w-8 rounded-md object-cover drop-shadow-[0_0_16px_rgba(200,255,0,0.45)]"
             />
