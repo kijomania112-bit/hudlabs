@@ -60,6 +60,17 @@ function CreateLaunchPage() {
   const selectedChain = getChainMeta(chainId);
   const nativeSymbol = selectedChain?.symbol ?? "ETH";
 
+  const [tokenType, setTokenType] = useState<"standard" | "rwa">("standard");
+  const [buyTax, setBuyTax] = useState<string>("1");
+  const [sellTax, setSellTax] = useState<string>("1");
+  const [taxAllocations, setTaxAllocations] = useState({
+    stocks: 100,
+    burn: 0,
+    dividend: 0,
+    liquidity: 0
+  });
+  const [minDividendBalance, setMinDividendBalance] = useState<string>("10000");
+
   const [image, setImage] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -82,9 +93,20 @@ function CreateLaunchPage() {
   const [submitted, setSubmitted] = useState(false);
 
   const feeValid = useMemo(() => /^0x[a-fA-F0-9]{40}$/.test(feeAddress.trim()), [feeAddress]);
+  const taxValid = useMemo(() => {
+    if (tokenType !== "rwa") return true;
+    const buyNum = parseFloat(buyTax);
+    const sellNum = parseFloat(sellTax);
+    const allocSum = Object.values(taxAllocations).reduce((a, b) => a + b, 0);
+    return (
+      !isNaN(buyNum) && buyNum >= 0 && buyNum <= 5 &&
+      !isNaN(sellNum) && sellNum >= 0 && sellNum <= 5 &&
+      allocSum === 100
+    );
+  }, [tokenType, buyTax, sellTax, taxAllocations]);
   const walletOnSelected = walletChain?.id === chainId;
   const canSubmit =
-    address && name.trim() && ticker.trim() && feeValid && walletOnSelected && !selectedChain?.comingSoon;
+    address && name.trim() && ticker.trim() && feeValid && taxValid && walletOnSelected && !selectedChain?.comingSoon;
 
   const onPickImage = (f?: File | null) => {
     if (!f) return;
@@ -139,6 +161,41 @@ function CreateLaunchPage() {
         </div>
 
         <form onSubmit={submit} className="space-y-6">
+          {/* Token Type */}
+          <Field 
+            label="Token Type" 
+            hint="Choose between a standard fair-launch token or a Real-World Asset (RWA) token that distributes dividends to holders."
+          >
+            <div className="grid gap-3 md:grid-cols-2">
+              {([
+                { 
+                  type: "standard", 
+                  label: "Standard Token", 
+                  description: "Fair-launch token with bonding curve and optional staking." 
+                },
+                { 
+                  type: "rwa", 
+                  label: "RWA Token", 
+                  description: "Real-World Asset token — 100% of tax revenue allocated to stocks and distributed as dividends to all holders." 
+                },
+              ] as const).map((opt) => (
+                <button
+                  key={opt.type}
+                  type="button"
+                  onClick={() => setTokenType(opt.type)}
+                  className={`flex flex-col items-start gap-2 rounded-2xl border p-4 text-left transition ${
+                    tokenType === opt.type
+                      ? "border-primary/50 bg-primary/10"
+                      : "border-border bg-muted/10 hover:border-primary/30 hover:text-foreground"
+                  }`}
+                >
+                  <span className="font-bold">{opt.label}</span>
+                  <span className="text-xs text-muted-foreground">{opt.description}</span>
+                </button>
+              ))}
+            </div>
+          </Field>
+
           {/* Chain */}
           <Field label="Network" hint="Where your token will be deployed.">
             <ChainSelector value={chainId} onChange={setChainId} />
@@ -243,28 +300,175 @@ function CreateLaunchPage() {
             </div>
           </Field>
 
-          {/* Staking */}
-          <Field
-            label="Staking (optional)"
-            hint="Enabling reserves 10% of supply as a staking pool; stakers pick their own lock (14/30/45/60d) and longer locks earn more. Sets the LP to 20%."
-          >
-            <div className="flex gap-2">
-              {(["none", "enable"] as const).map((opt) => (
-                <button
-                  key={opt}
-                  type="button"
-                  onClick={() => setStaking(opt)}
-                  className={`rounded-full px-5 py-2 text-sm font-semibold capitalize transition ${
-                    staking === opt
-                      ? "gradient-neon text-[#050505] neon-glow"
-                      : "border border-border bg-muted/10 text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {opt === "none" ? "None" : "Enable"}
-                </button>
-              ))}
-            </div>
-          </Field>
+          {/* Token Settings (only for RWA Token) */}
+          {tokenType === "rwa" && (
+            <>
+              {/* Buy & Sell Tax */}
+              <div className="space-y-4">
+                <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  Token Setting
+                </div>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Field
+                    label={
+                      <span>
+                        Buy Tax Rate <span className="text-destructive">*</span>
+                      </span>
+                    }
+                  >
+                    <div className="relative">
+                      <input
+                        type="number"
+                        min="0"
+                        max="5"
+                        step="0.1"
+                        value={buyTax}
+                        onChange={(e) => {
+                          let val = e.target.value;
+                          const num = parseFloat(val);
+                          if (!isNaN(num) && num > 5) val = "5";
+                          setBuyTax(val);
+                        }}
+                        className="w-full rounded-2xl border bg-muted/10 px-4 py-3 pr-12 text-sm font-mono-num outline-none transition placeholder:text-muted-foreground/60 focus:border-primary/50"
+                      />
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-muted-foreground">
+                        %
+                      </span>
+                    </div>
+                  </Field>
+                  <Field
+                    label={
+                      <span>
+                        Sell Tax Rate <span className="text-destructive">*</span>
+                      </span>
+                    }
+                  >
+                    <div className="relative">
+                      <input
+                        type="number"
+                        min="0"
+                        max="5"
+                        step="0.1"
+                        value={sellTax}
+                        onChange={(e) => {
+                          let val = e.target.value;
+                          const num = parseFloat(val);
+                          if (!isNaN(num) && num > 5) val = "5";
+                          setSellTax(val);
+                        }}
+                        className="w-full rounded-2xl border bg-muted/10 px-4 py-3 pr-12 text-sm font-mono-num outline-none transition placeholder:text-muted-foreground/60 focus:border-primary/50"
+                      />
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-muted-foreground">
+                        %
+                      </span>
+                    </div>
+                  </Field>
+                </div>
+              </div>
+
+              {/* Tax Allocation */}
+              <div className="space-y-4 mt-6">
+                <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  Tax Allocation
+                </div>
+                <div className="space-y-4">
+                  {[
+                    { key: "stocks", label: "Stocks" },
+                    { key: "burn", label: "Burn" },
+                    { key: "dividend", label: "Dividend" },
+                    { key: "liquidity", label: "Liquidity" },
+                  ].map(({ key, label }) => {
+                      // @ts-ignore
+                      const currentValue = taxAllocations[key];
+                      return (
+                        <div key={key} className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-semibold">{label}</span>
+                            <span className="text-sm font-mono-num">{currentValue}%</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value={currentValue}
+                            onChange={(e) => {
+                              const val = parseInt(e.target.value);
+                              setTaxAllocations(prev => {
+                                const others = Object.entries(prev).filter(([k]) => k !== key).reduce((acc, [k, v]) => ({...acc, [k]: v}), {});
+                                const remaining = 100 - val;
+                                const otherKeys = Object.keys(others);
+                                const totalOthers = Object.values(others).reduce((a, b) => a + b, 0);
+                                const newAllocations = { ...prev, [key]: val };
+                                if (totalOthers > 0) {
+                                  otherKeys.forEach(k => {
+                                    // @ts-ignore
+                                    newAllocations[k] = Math.round((prev[k as keyof typeof prev] / totalOthers) * remaining);
+                                  });
+                                } else if (otherKeys.length > 0) {
+                                  // @ts-ignore
+                                  newAllocations[otherKeys[0]] = remaining;
+                                }
+                                const sum = Object.values(newAllocations).reduce((a, b) => a + b, 0);
+                                if (sum !== 100) {
+                                  // Adjust first other key
+                                  const firstOther = otherKeys.find(k => k !== key);
+                                  if (firstOther) {
+                                    // @ts-ignore
+                                    newAllocations[firstOther] += (100 - sum);
+                                  }
+                                }
+                                return newAllocations;
+                              });
+                            }}
+                            className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                          />
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+
+              {/* Minimum Dividend Balance */}
+              <div className="mt-6">
+                <Field
+                  label="Minimum Balance for Dividend Eligibility (tokens)">
+                  <input
+                    type="number"
+                    min="0"
+                    value={minDividendBalance}
+                    onChange={(e) => setMinDividendBalance(e.target.value)}
+                    placeholder="10000"
+                    className="w-full rounded-2xl border bg-muted/10 px-4 py-3 text-sm font-mono-num outline-none transition placeholder:text-muted-foreground/60 focus:border-primary/50"
+                  />
+                </Field>
+              </div>
+            </>
+          )}
+
+          {/* Staking (only for Standard Token) */}
+          {tokenType === "standard" && (
+            <Field
+              label="Staking (optional)"
+              hint="Enabling reserves 10% of supply as a staking pool; stakers pick their own lock (14/30/45/60d) and longer locks earn more. Sets the LP to 20%."
+            >
+              <div className="flex gap-2">
+                {(["none", "enable"] as const).map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() => setStaking(opt)}
+                    className={`rounded-full px-5 py-2 text-sm font-semibold capitalize transition ${
+                      staking === opt
+                        ? "gradient-neon text-[#050505] neon-glow"
+                        : "border border-border bg-muted/10 text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {opt === "none" ? "None" : "Enable"}
+                  </button>
+                ))}
+              </div>
+            </Field>
+          )}
 
           {/* Fee address */}
           <Field
@@ -273,7 +477,11 @@ function CreateLaunchPage() {
                 Fee address <span className="text-destructive">*</span>
               </span>
             }
-            hint="Where your share of trade fees is paid (0.5% of every buy & sell, on the curve and after graduation). Fixed at launch."
+            hint={
+              tokenType === "rwa"
+                ? "Where your share of trade fees is paid (0.5% of every buy & sell). 100% of tax revenue will be allocated to stocks and distributed as dividends to all token holders. Fixed at launch."
+                : "Where your share of trade fees is paid (0.5% of every buy & sell, on the curve and after graduation). Fixed at launch."
+            }
           >
             <input
               value={feeAddress}
