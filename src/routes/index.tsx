@@ -1,9 +1,16 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import * as CountUpModule from "react-countup";
-const CountUp: React.ComponentType<{ end: number; duration?: number; separator?: string }> =
-  (CountUpModule as { default?: unknown }).default as never ?? (CountUpModule as never);
+const CountUp = (
+  ((CountUpModule as any).default?.default ?? (CountUpModule as any).default ?? CountUpModule) as React.ComponentType<{
+    end: number;
+    duration?: number;
+    separator?: string;
+  }>
+);
+
+
 import {
   Zap, Coins, Building2, ShieldCheck, LayoutDashboard, LineChart, Wallet as WalletIcon,
   Droplets, Megaphone, Rocket, Cpu, ArrowRight, ArrowUpRight, Check, ChevronDown,
@@ -156,12 +163,12 @@ function Navbar() {
               {l.label}
             </a>
           ))}
-          <a
-            href="#launch"
+          <Link
+            to="/create"
             className="ml-1 rounded-full px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition"
           >
             Launch App
-          </a>
+          </Link>
         </nav>
 
         <div className="hidden md:flex items-center gap-2">
@@ -213,13 +220,13 @@ function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <a
-                href="#launch"
+              <Link
+                to="/create"
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-4 py-3 text-sm font-medium text-primary hover:bg-primary/10"
               >
                 Launch App
-              </a>
+              </Link>
               <div className="mt-2 pt-3 border-t border-border flex items-center gap-2">
                 <ConnectWalletButton compact />
                 <a href="https://x.com/hudlabs" target="_blank" rel="noreferrer" className="h-10 w-10 inline-flex items-center justify-center rounded-full glass"><Twitter className="h-4 w-4" /></a>
@@ -362,13 +369,13 @@ function Hero() {
 
         <FadeIn delay={0.35}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#launch"
+            <Link
+              to="/create"
               className="group inline-flex items-center gap-2 rounded-full gradient-neon px-7 py-3.5 text-sm font-semibold text-[#050505] neon-glow hover:neon-glow-strong transition-all hover:scale-[1.02]"
             >
               Launch App
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </Link>
             <a
               href="#features"
               className="inline-flex items-center gap-2 rounded-full glass px-7 py-3.5 text-sm font-semibold hover:border-primary/40 transition"
@@ -568,35 +575,36 @@ function Products() {
                 A complete suite. One elegant surface.
               </h2>
             </div>
-            <a href="#launch" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
+            <Link to="/create" className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
               Explore all <ArrowUpRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </FadeIn>
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PRODUCTS.map((p, i) => (
-            <motion.a
+            <motion.div
               key={p.name}
-              href="#launch"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: (i % 4) * 0.06, duration: 0.6, ease }}
-              className="glass hover-elevate group relative flex flex-col justify-between rounded-2xl p-5 min-h-[180px]"
+              className="glass hover-elevate group relative rounded-2xl p-5 min-h-[180px]"
             >
-              <div>
-                <span className="inline-flex rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] uppercase tracking-widest text-primary">
-                  {p.tag}
-                </span>
-                <h3 className="mt-4 font-display text-lg font-semibold">{p.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
-              </div>
-              <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
-                <span>Coming soon</span>
-                <ArrowUpRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </div>
-            </motion.a>
+              <Link to="/create" className="flex flex-col justify-between h-full">
+                <div>
+                  <span className="inline-flex rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] uppercase tracking-widest text-primary">
+                    {p.tag}
+                  </span>
+                  <h3 className="mt-4 font-display text-lg font-semibold">{p.name}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
+                </div>
+                <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
+                  <span>Coming soon</span>
+                  <ArrowUpRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -753,12 +761,12 @@ function Community() {
             Launch with confidence on HUDLABS.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#home"
+            <Link
+              to="/create"
               className="inline-flex items-center gap-2 rounded-full gradient-neon px-7 py-3.5 text-sm font-semibold text-[#050505] neon-glow hover:neon-glow-strong transition"
             >
               Launch App <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
             <a
               href="https://t.me/hudlabs"
               target="_blank" rel="noreferrer"
@@ -806,9 +814,15 @@ function Footer() {
               ["Products", "#products"],
               ["Roadmap", "#roadmap"],
               ["FAQ", "#faq"],
-              ["Launch App", "#launch"],
+              ["Launch App", "/create"],
             ].map(([l, h]) => (
-              <li key={l}><a href={h} className="text-muted-foreground hover:text-foreground transition">{l}</a></li>
+              <li key={l}>
+                {h.startsWith("#") ? (
+                  <a href={h} className="text-muted-foreground hover:text-foreground transition">{l}</a>
+                ) : (
+                  <Link to={h} className="text-muted-foreground hover:text-foreground transition">{l}</Link>
+                )}
+              </li>
             ))}
           </ul>
         </div>

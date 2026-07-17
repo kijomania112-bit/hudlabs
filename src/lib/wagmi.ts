@@ -36,7 +36,7 @@ export const wagmiConfig = getDefaultConfig({
   appName: "HUDLABS",
   projectId,
   chains: [robinhoodChain, mainnet, base, bsc, arc, monad],
-  ssr: false,
+  ssr: true,
 
   wallets: [
     {

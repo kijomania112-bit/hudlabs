@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useAccount } from "wagmi";
+import logoAsset from "@/assets/hudlabs-logo.png.asset.json";
 import {
   Upload, Rocket, Info, Twitter, Send, Github, Globe, BookOpen,
   MessageCircle, ImageIcon, Sparkles, Loader2, Check,
@@ -97,7 +98,11 @@ function CreateLaunchPage() {
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <Link to="/" className="flex items-center gap-2">
-            <span className="h-6 w-6 rounded-md gradient-neon" />
+            <img
+              src={logoAsset.url}
+              alt="HUDLABS"
+              className="h-8 w-8 rounded-md object-cover drop-shadow-[0_0_16px_rgba(200,255,0,0.45)]"
+            />
             <span className="font-display text-lg font-bold tracking-tight">HUDLABS</span>
           </Link>
           <ConnectWalletButton compact />
