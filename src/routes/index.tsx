@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
-import CountUp from "react-countup";
+import { default as CountUp } from "react-countup";
 import {
   Zap, Coins, Building2, ShieldCheck, LayoutDashboard, LineChart, Wallet as WalletIcon,
   Droplets, Megaphone, Rocket, Cpu, ArrowRight, ArrowUpRight, Check, ChevronDown,
