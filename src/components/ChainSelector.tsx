@@ -62,7 +62,7 @@ export function ChainSelector({ value, onChange, className = "" }: Props) {
           className="flex w-full items-center justify-between gap-3 rounded-2xl glass px-4 py-3 text-left hover:border-primary/40 transition"
         >
           <span className="flex items-center gap-3">
-            <ChainDot color={selected.color} />
+            <img src={selected.logo} alt={selected.name} className="h-7 w-7 rounded-full object-cover" />
             <span className="flex flex-col">
               <span className="text-sm font-semibold">{selected.name}</span>
               <span className="text-[11px] text-muted-foreground font-mono-num">
@@ -92,7 +92,7 @@ export function ChainSelector({ value, onChange, className = "" }: Props) {
                       } ${active ? "bg-primary/5" : ""}`}
                     >
                       <span className="flex items-center gap-3">
-                        <ChainDot color={c.color} />
+                        <img src={c.logo} alt={c.name} className="h-7 w-7 rounded-full object-cover" />
                         <span className="flex flex-col">
                           <span className="font-medium">{c.name}</span>
                           <span className="text-[11px] text-muted-foreground">
