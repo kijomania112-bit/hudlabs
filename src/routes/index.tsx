@@ -28,25 +28,25 @@ export const Route = createFileRoute("/")({
   component: HudLabsLanding,
   head: () => ({
     meta: [
-      { title: "HUDLABS — Premium Launchpad for Robinhood Chain" },
+      { title: "HUDLABS — The Home of Innovation on Robinhood Chain" },
       {
         name: "description",
         content:
-          "Launch dividend-enabled tokens, RWAs and enterprise-grade blockchain projects on Robinhood Chain with HUDLABS.",
+          "The Home of Innovation on Robinhood Chain. Launch dividend-enabled tokens, RWAs and enterprise-grade blockchain projects with HUDLABS.",
       },
-      { property: "og:title", content: "HUDLABS — Premium Launchpad for Robinhood Chain" },
+      { property: "og:title", content: "HUDLABS — The Home of Innovation on Robinhood Chain" },
       {
         property: "og:description",
         content:
-          "Launch dividend-enabled tokens, RWAs and enterprise-grade blockchain projects on Robinhood Chain with HUDLABS.",
+          "The Home of Innovation on Robinhood Chain. Launch dividend-enabled tokens, RWAs and enterprise-grade blockchain projects with HUDLABS.",
       },
       { property: "og:image", content: OG_IMAGE },
       { property: "og:url", content: "/" },
       { name: "twitter:image", content: OG_IMAGE },
-      { name: "twitter:title", content: "HUDLABS — Premium Launchpad for Robinhood Chain" },
+      { name: "twitter:title", content: "HUDLABS — The Home of Innovation on Robinhood Chain" },
       {
         name: "twitter:description",
-        content: "Empowering Innovation on Robinhood Chain. Built by ETHF Team.",
+        content: "The Home of Innovation on Robinhood Chain. Built by ETHF Team.",
       },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -351,10 +351,10 @@ function Hero() {
 
         <FadeIn delay={0.15}>
           <h1 className="mt-6 font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight">
-            Empowering Innovation
+            The Home of
             <br />
             <span className="bg-clip-text text-transparent bg-[linear-gradient(120deg,#c8ff00_0%,#65ff66_50%,#9fef00_100%)]">
-              on Robinhood Chain
+              Innovation on Robinhood Chain
             </span>
           </h1>
         </FadeIn>
@@ -800,7 +800,7 @@ function Footer() {
             <span className="font-display text-lg font-bold">HUDLABS</span>
           </div>
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-            Empowering Innovation on Robinhood Chain.
+            The Home of Innovation on Robinhood Chain.
           </p>
           <p className="mt-3 text-xs text-muted-foreground">Built by ETHF Team.</p>
         </div>
