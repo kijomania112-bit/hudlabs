@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
-import { default as CountUp } from "react-countup";
+import * as CountUpModule from "react-countup";
+const CountUp: React.ComponentType<{ end: number; duration?: number; separator?: string }> =
+  (CountUpModule as { default?: unknown }).default as never ?? (CountUpModule as never);
 import {
   Zap, Coins, Building2, ShieldCheck, LayoutDashboard, LineChart, Wallet as WalletIcon,
   Droplets, Megaphone, Rocket, Cpu, ArrowRight, ArrowUpRight, Check, ChevronDown,
