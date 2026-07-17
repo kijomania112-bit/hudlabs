@@ -167,7 +167,7 @@ function Navbar() {
             to="/create"
             className="ml-1 rounded-full px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition"
           >
-            Launch App
+            Create Token
           </Link>
         </nav>
 
@@ -225,7 +225,7 @@ function Navbar() {
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-4 py-3 text-sm font-medium text-primary hover:bg-primary/10"
               >
-                Launch App
+                Create Token
               </Link>
               <div className="mt-2 pt-3 border-t border-border flex items-center gap-2">
                 <ConnectWalletButton compact />
@@ -373,7 +373,7 @@ function Hero() {
               to="/create"
               className="group inline-flex items-center gap-2 rounded-full gradient-neon px-7 py-3.5 text-sm font-semibold text-[#050505] neon-glow hover:neon-glow-strong transition-all hover:scale-[1.02]"
             >
-              Launch App
+              Create Token
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <a
@@ -765,7 +765,7 @@ function Community() {
               to="/create"
               className="inline-flex items-center gap-2 rounded-full gradient-neon px-7 py-3.5 text-sm font-semibold text-[#050505] neon-glow hover:neon-glow-strong transition"
             >
-              Launch App <ArrowRight className="h-4 w-4" />
+              Create Token <ArrowRight className="h-4 w-4" />
             </Link>
             <a
               href="https://t.me/hudlabs"
@@ -814,7 +814,7 @@ function Footer() {
               ["Products", "#products"],
               ["Roadmap", "#roadmap"],
               ["FAQ", "#faq"],
-              ["Launch App", "/create"],
+              ["Create Token", "/create"],
             ].map(([l, h]) => (
               <li key={l}>
                 {h.startsWith("#") ? (
