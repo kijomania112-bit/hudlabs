@@ -56,7 +56,7 @@ const SUPPLIES = [
 function CreateLaunchPage() {
   const { address, chain: walletChain } = useAccount();
 
-  const [chainId, setChainId] = useState<number>(626);
+  const [chainId, setChainId] = useState<number>(4663);
   const selectedChain = getChainMeta(chainId);
   const nativeSymbol = selectedChain?.symbol ?? "ETH";
 

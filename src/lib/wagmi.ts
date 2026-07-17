@@ -12,14 +12,14 @@ import { defineChain } from "viem";
 import { mainnet, base, bsc, arc, monad } from "viem/chains";
 
 export const robinhoodChain = defineChain({
-  id: 626,
+  id: 4663,
   name: "Robinhood Chain",
-  nativeCurrency: { name: "HOOD", symbol: "HOOD", decimals: 18 },
+  nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
   rpcUrls: {
-    default: { http: ["https://rpc.robinhoodchain.com"] },
+    default: { http: ["https://rpc.mainnet.chain.robinhood.com"] },
   },
   blockExplorers: {
-    default: { name: "Robinhood Explorer", url: "https://explorer.robinhoodchain.com" },
+    default: { name: "Robinhood Chain Explorer", url: "https://robinhoodchain.blockscout.com" },
   },
   testnet: false,
 });

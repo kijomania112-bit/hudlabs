@@ -12,7 +12,7 @@ export type SupportedChain = {
 };
 
 export const SUPPORTED_CHAINS: SupportedChain[] = [
-  { id: robinhoodChain.id, name: "Robinhood Chain", short: "Robinhood", symbol: "HOOD", color: "#C8FF00", evm: true },
+  { id: robinhoodChain.id, name: "Robinhood Chain", short: "Robinhood", symbol: "ETH", color: "#C8FF00", evm: true },
   { id: mainnet.id,        name: "Ethereum",        short: "Ethereum", symbol: "ETH",  color: "#627EEA", evm: true },
   { id: base.id,           name: "Base",            short: "Base",     symbol: "ETH",  color: "#0052FF", evm: true },
   { id: bsc.id,            name: "BNB Smart Chain", short: "BSC",      symbol: "BNB",  color: "#F0B90B", evm: true },
