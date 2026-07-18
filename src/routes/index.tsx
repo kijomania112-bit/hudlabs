@@ -382,38 +382,17 @@ function Hero() {
               Create Token
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <a
-              href="https://pons.family/launchpad/0xf907d12fab43050ebe27c515d59e2ae7dcad9e56"
-              target="_blank"
-              rel="noreferrer"
+            <button
               className="inline-flex items-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 px-7 py-3.5 text-sm font-semibold transition"
             >
               Buy $HUDL
               <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <a
-              href="https://dexscreener.com/robinhood/0xc59ca43d9671c9ae697dab3fb1ec340508285d03"
-              target="_blank"
-              rel="noreferrer"
+            </button>
+            <button
               className="inline-flex items-center gap-2 rounded-full glass px-7 py-3.5 text-sm font-semibold hover:border-primary/40 transition"
             >
               Chart
               <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
-          <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground mb-2">$HUDL Contract Address:</p>
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText("0xf907d12fab43050ebe27c515d59e2ae7dcad9e56");
-                alert("Contract address copied!");
-              }}
-              className="inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs font-mono text-muted-foreground hover:text-foreground hover:border-primary/40 transition"
-            >
-              0xf907d12fab43050ebe27c515d59e2ae7dcad9e56
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
             </button>
           </div>
         </FadeIn>
