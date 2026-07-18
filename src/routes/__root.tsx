@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "HUDLABS" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@hudlabs" },
+      { name: "twitter:site", content: "@hudlaboratory" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

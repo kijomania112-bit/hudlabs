@@ -174,7 +174,7 @@ function Navbar() {
 
         <div className="hidden md:flex items-center gap-2">
           <a
-            href="https://x.com/hudlabs"
+            href="https://x.com/hudlaboratory"
             target="_blank" rel="noreferrer"
             aria-label="X"
             className="hidden md:inline-flex h-9 w-9 items-center justify-center rounded-full glass hover:border-primary/40 transition"
@@ -230,7 +230,7 @@ function Navbar() {
               </Link>
               <div className="mt-2 pt-3 border-t border-border flex items-center gap-2">
                 <ConnectWalletButton compact />
-                <a href="https://x.com/hudlabs" target="_blank" rel="noreferrer" className="h-10 w-10 inline-flex items-center justify-center rounded-full glass"><Twitter className="h-4 w-4" /></a>
+                <a href="https://x.com/hudlaboratory" target="_blank" rel="noreferrer" className="h-10 w-10 inline-flex items-center justify-center rounded-full glass"><Twitter className="h-4 w-4" /></a>
                 <a href="https://t.me/hudlabs" target="_blank" rel="noreferrer" className="h-10 w-10 inline-flex items-center justify-center rounded-full glass"><Send className="h-4 w-4" /></a>
               </div>
             </div>
@@ -781,7 +781,7 @@ function Community() {
               <Send className="h-4 w-4" /> Join Telegram
             </a>
             <a
-              href="https://x.com/hudlabs"
+              href="https://x.com/hudlaboratory"
               target="_blank" rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full glass px-7 py-3.5 text-sm font-semibold hover:border-primary/40 transition"
             >
@@ -836,7 +836,7 @@ function Footer() {
         <div>
           <div className="text-xs uppercase tracking-widest text-muted-foreground">Social</div>
           <ul className="mt-4 space-y-2 text-sm">
-            <li><a href="https://x.com/hudlabs" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"><Twitter className="h-4 w-4" /> X</a></li>
+            <li><a href="https://x.com/hudlaboratory" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"><Twitter className="h-4 w-4" /> X</a></li>
             <li><a href="https://t.me/hudlabs" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"><Send className="h-4 w-4" /> Telegram</a></li>
             <li><a href="https://github.com/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"><Github className="h-4 w-4" /> Github</a></li>
           </ul>
