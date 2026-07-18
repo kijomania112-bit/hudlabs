@@ -74,11 +74,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "HUDLABS — The Home of Innovation on Robinhood Chain" },
+      { title: "HUDLABS — Meme & RWA. One Click. One Place." },
       {
         name: "description",
         content:
-          "HUDLABS is a premium launchpad for Robinhood Chain — token creation, dividend-enabled tokens, RWA tokenization and enterprise launch tooling.",
+          "Meme & RWA. One Click. One Place. — token creation, dividend-enabled tokens, RWA tokenization and enterprise launch tooling.",
       },
       { name: "author", content: "ETHF Team" },
       { name: "theme-color", content: "#050505" },

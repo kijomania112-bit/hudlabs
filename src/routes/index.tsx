@@ -17,6 +17,7 @@ import {
   Menu, X, Twitter, Send, Github, Sparkles, Lock, Layers, BarChart3,
 } from "lucide-react";
 import logoAsset from "@/assets/hudlabs-logo.jpeg";
+import bannerAsset from "@/assets/hud-banner.jpeg";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 
 const OG_IMAGE =
@@ -28,25 +29,25 @@ export const Route = createFileRoute("/")({
   component: HudLabsLanding,
   head: () => ({
     meta: [
-      { title: "HUDLABS — The Home of Innovation on Robinhood Chain" },
+      { title: "HUDLABS — Meme & RWA. One Click. One Place." },
       {
         name: "description",
         content:
-          "The Home of Innovation on Robinhood Chain. Launch dividend-enabled tokens, RWAs and enterprise-grade blockchain projects with HUDLABS.",
+          "Meme & RWA. One Click. One Place. Launch dividend-enabled tokens, RWAs and enterprise-grade blockchain projects with HUDLABS.",
       },
-      { property: "og:title", content: "HUDLABS — The Home of Innovation on Robinhood Chain" },
+      { property: "og:title", content: "HUDLABS — Meme & RWA. One Click. One Place." },
       {
         property: "og:description",
         content:
-          "The Home of Innovation on Robinhood Chain. Launch dividend-enabled tokens, RWAs and enterprise-grade blockchain projects with HUDLABS.",
+          "Meme & RWA. One Click. One Place. Launch dividend-enabled tokens, RWAs and enterprise-grade blockchain projects with HUDLABS.",
       },
       { property: "og:image", content: OG_IMAGE },
       { property: "og:url", content: "/" },
       { name: "twitter:image", content: OG_IMAGE },
-      { name: "twitter:title", content: "HUDLABS — The Home of Innovation on Robinhood Chain" },
+      { name: "twitter:title", content: "HUDLABS — Meme & RWA. One Click. One Place." },
       {
         name: "twitter:description",
-        content: "The Home of Innovation on Robinhood Chain. Built by ETHF Team.",
+        content: "Meme & RWA. One Click. One Place. Built by ETHF Team.",
       },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -351,15 +352,20 @@ function Hero() {
 
         <FadeIn delay={0.15}>
           <h1 className="mt-6 font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight">
-            The Home of
+            Meme & RWA.
             <br />
             <span className="bg-clip-text text-transparent bg-[linear-gradient(120deg,#c8ff00_0%,#65ff66_50%,#9fef00_100%)]">
-              Innovation on Robinhood Chain
+              One Click. One Place.
             </span>
           </h1>
         </FadeIn>
-
         <FadeIn delay={0.25}>
+          <div className="mt-6">
+            <img src={bannerAsset} alt="HUDLABS Banner" className="mx-auto max-w-5xl w-full rounded-2xl shadow-[0_20px_60px_-15px_rgba(200,255,0,0.2)]" />
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.35}>
           <p className="mx-auto mt-8 max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed">
             HUDLABS is a premium launchpad designed to simplify token creation, dividend-enabled
             projects and Real World Asset tokenization — with enterprise-grade security and
@@ -367,7 +373,7 @@ function Hero() {
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.35}>
+        <FadeIn delay={0.45}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/create"
@@ -800,7 +806,7 @@ function Footer() {
             <span className="font-display text-lg font-bold">HUDLABS</span>
           </div>
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-            The Home of Innovation on Robinhood Chain.
+            Meme & RWA. One Click. One Place.
           </p>
           <p className="mt-3 text-xs text-muted-foreground">Built by ETHF Team.</p>
         </div>
